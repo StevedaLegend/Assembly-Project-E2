@@ -1,0 +1,30 @@
+     1                                  ; Filename starter.asm
+     2                                  
+     3                                  ; GLOBALS
+     4                                  global _start ;Declared for linker this is declaring _start (entry point)
+     5                                  
+     6                                  ; TEXT SECTION
+     7                                  section	.text
+     8                                  _start:	                                 ;linker entry point
+     9 00000000 BA17000000                 mov	edx,  msg_length                 ;message length see length equ 32 Bit Register
+    10 00000005 B9[00000000]               mov	ecx,  message                    ;message 32 Bit Register
+    11                                  
+    12 0000000A BB01000000                 mov	ebx,  0x1                        ;file descriptor (stdout) 32 Bit Register
+    13                                     
+    14 0000000F B804000000                 mov	eax,  0x4                        ;system call number (sys_write) 32 Bit Register
+    15                                  
+    16 00000014 CD80                       int	0x80                             ;call kernel 32 bit System
+    17                                  	
+    18 00000016 B801000000                 mov	eax,  0x1                        ;system call number (sys_exit) 32 Bit Register
+    19                                  
+    20 0000001B BB00000000                 mov   ebx,  0x0                        ;return status 32 Bit Register
+    21                                  
+    22 00000020 CD80                       int	0x80                             ;call kernel, system call 32 bit System
+    23                                  
+    24                                  ; DATA SECTION
+    25                                  section	.data
+    26                                  
+    27 00000000 436F6D707574657220-     message db 'Computer Architecture!', 0xA    ;string to be printed
+    27 00000009 417263686974656374-
+    27 00000012 757265210A         
+    28                                  msg_length equ $-message                  ;length of the string
