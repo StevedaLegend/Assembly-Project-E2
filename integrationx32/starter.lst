@@ -1,0 +1,9 @@
+     1                                  global add
+     2                                  
+     3                                  section .data
+     4                                  section .text
+     5                                  add:
+     6 00000000 8B442404                    mov   eax, [esp+4]      ; argument 1 offset by 4 bytes (size of interger), first 4 bytes current instruction
+     7 00000004 03442408                    add   eax, [esp+8]      ; argument 2 offset by 4 bytes (size of interger)
+     8 00000008 0344240C                    add   eax, [esp+12]
+     9 0000000C C3                          ret
